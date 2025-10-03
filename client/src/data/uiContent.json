@@ -1,0 +1,51 @@
+{
+  "navigation": {
+    "brand": "Groq Content Generator",
+    "items": [
+      { "path": "/login", "label": "Login" },
+      { "path": "/onboarding", "label": "Onboarding" },
+      { "path": "/generate", "label": "Generate" },
+      { "path": "/library", "label": "Library" },
+      { "path": "/settings", "label": "Settings" }
+    ]
+  },
+  "pages": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in with a magic link to keep creating",
+      "cta": "Send magic link"
+    },
+    "onboarding": {
+      "title": "Onboard your brand DNA",
+      "subtitle": "Tell us about your niche, audience, and goals to personalize content.",
+      "submit": "Save profile",
+      "tips": [
+        "Be specific about your niche and primary audience.",
+        "List the channels you publish on regularly.",
+        "Share constraints so outputs stay on-brand."
+      ]
+    },
+    "generate": {
+      "title": "Generate content on-demand",
+      "subtitle": "Pick a channel and hit generate. We keep everything JSON-structured.",
+      "cta": "Generate"
+    },
+    "library": {
+      "title": "Content library",
+      "subtitle": "Browse your generated assets, mark favorites, and refine.",
+      "empty": "No assets yet. Generate something to get started."
+    },
+    "asset": {
+      "ctaCopy": "Copy",
+      "ctaDownload": "Download .md",
+      "ctaFavorite": "Favorite",
+      "ctaRefine": "Refine"
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage plan, API keys, and team seats.",
+      "apiLabel": "Groq API key",
+      "save": "Save settings"
+    }
+  }
+}

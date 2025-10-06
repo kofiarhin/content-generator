@@ -1,33 +1,30 @@
-// server/services/contentServices.js
+// aiContent.js
+// Generates channel-specific content with defaults for tone, words, and platform
 
 const { Groq } = require("groq-sdk");
 
 const MODEL_NAME = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
 const MAX_TOKENS = Number(process.env.CHAT_MAX_TOKENS) || 1024;
 
-const buildMessages = (params = {}) => {
-  const {
-    channel = "YouTube",
-    tone = "educational and motivational",
-    wordsTarget = 200,
-  } = params;
-
+const buildMessages = ({ channel, tone, wordsTarget }) => {
   const systemPrompt = `
-You are a creative strategist specialized in ${channel} content.
-Generate engaging, high-performing content matching the tone and word target.
-- Match the tone exactly
-- Stay within ±10% of the word target
-- Adapt to ${channel} best practices
-- Output only the content (no markdown)
-`.trim();
+You are a creative strategist and copywriter specialized in ${channel} content.
+Generate engaging, high-performing content that matches the requested tone and word target.
+
+Guidelines:
+- Match the tone exactly.
+- Stay within ±10% of the word target.
+- Adapt writing style to fit ${channel} best practices (hooks, pacing, CTA style).
+- Output only the final content. No explanations or markdown.
+`;
 
   const userPrompt = `
 Channel: ${channel}
 Tone: ${tone}
 Word Target: ${wordsTarget}
 
-Write a ${channel} script or post matching this tone and length.
-`.trim();
+Write a full ${channel} post or script matching the tone and length.
+`;
 
   return [
     { role: "system", content: systemPrompt },
@@ -35,14 +32,11 @@ Write a ${channel} script or post matching this tone and length.
   ];
 };
 
-const generateChannelContent = async (params = {}) => {
-  // ⬇️ destructure INSIDE (safe even when called with no args)
-  const {
-    channel = "YouTube",
-    tone = "educational and motivational",
-    wordsTarget = 200,
-  } = params;
-
+const generateChannelContent = async ({
+  channel = "YouTube",
+  tone = "educational and motivational",
+  wordsTarget = 200,
+}) => {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) throw new Error("GROQ_API_KEY environment variable is required");
 
@@ -54,6 +48,7 @@ const generateChannelContent = async (params = {}) => {
     messages,
     temperature: 0.5,
     max_tokens: MAX_TOKENS,
+    top_p: 1,
   });
 
   const content = completion?.choices?.[0]?.message?.content?.trim() || "";

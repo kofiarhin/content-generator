@@ -1,11 +1,12 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import Login from './pages/Login';
-import Onboarding from './pages/Onboarding';
-import Generate from './pages/Generate';
-import Library from './pages/Library';
-import AssetDetail from './pages/AssetDetail';
-import Settings from './pages/Settings';
+import { useEffect } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Login from "./pages/Login";
+import Onboarding from "./pages/Onboarding";
+import Generate from "./pages/Generate";
+import Library from "./pages/Library";
+import AssetDetail from "./pages/AssetDetail";
+import Settings from "./pages/Settings";
 
 const App = () => (
   <Routes>
